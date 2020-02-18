@@ -19,12 +19,16 @@ public class QuotePageController {
     this.repository = repository;
   }
 
-
   @GetMapping(value = "/random", produces = MediaType.TEXT_HTML_VALUE)
   public String getRandom(Model model) {
-    model.addAttribute( "quote", repository.getRandom().get() );
+    model.addAttribute("quote", repository.getRandom().get());
     return "random";
+  }
 
+  @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
+  public String getAll(Model model) {
+    model.addAttribute( "quotes", repository.getAllByOrderByCreatedDesc() );
+    return "list";
   }
 
 }
